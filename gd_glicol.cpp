@@ -1,7 +1,7 @@
 #include "gd_glicol.h"
 #include "core/os/os.h"
 
-F64 env__now(void *) {
+f64 w2c_env_now(struct w2c_env *) {
 	return OS::get_singleton()->get_unix_time();
 }
 
