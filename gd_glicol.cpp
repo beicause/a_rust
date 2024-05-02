@@ -6,9 +6,7 @@ F64 env__now(void *) {
 }
 
 void WasmGlicol::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("alloc_f32", "sz"), &WasmGlicol::alloc_f32);
 	ClassDB::bind_method(D_METHOD("alloc_u8", "sz"), &WasmGlicol::alloc_u8);
-	ClassDB::bind_method(D_METHOD("dealloc_f32", "ptr", "sz"), &WasmGlicol::dealloc_f32);
 	ClassDB::bind_method(D_METHOD("dealloc_u8", "ptr", "sz"), &WasmGlicol::dealloc_u8);
 	ClassDB::bind_method(D_METHOD("process", "o_buf_ptr", "buf_len", "o_result_ptr"), &WasmGlicol::process);
 	ClassDB::bind_method(D_METHOD("add_sample", "name_ptr", "arr_ptr", "arr_len", "channels", "sample_rate"), &WasmGlicol::add_sample);

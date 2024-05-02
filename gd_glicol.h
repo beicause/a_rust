@@ -20,9 +20,7 @@ public:
 		glicolwasmFreeInstance(&inst);
 	}
 
-	U32 alloc_f32(U32 sz) { return glicolwasm_alloc_f32(&inst, sz); }
 	U32 alloc_u8(U32 sz) { return glicolwasm_alloc_u8(&inst, sz); }
-	void dealloc_f32(U32 ptr, U32 sz) { glicolwasm_dealloc_f32(&inst, ptr, sz); };
 	void dealloc_u8(U32 ptr, U32 sz) { glicolwasm_dealloc_u8(&inst, ptr, sz); };
 
 	void process(U32 o_buf_ptr, U32 buf_len, U32 o_result_ptr) { glicolwasm_process(&inst, o_buf_ptr, buf_len, o_result_ptr); };
