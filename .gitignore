@@ -15,4 +15,5 @@ compile_commands.json
 
 .vscode
 
+target
 __pycache__
