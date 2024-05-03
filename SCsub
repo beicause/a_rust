@@ -1,6 +1,3 @@
-import os
-import re
-
 Import("env")
 
 m_env = env.Clone()
