@@ -4,7 +4,7 @@
 #include "core/object/ref_counted.h"
 
 
-#define IMPL_MEMORY_IO_FUNC(suffix,cls)\
+#define IMPL_MEMORY_IO_FUNC(suffix,cls,type_size)\
 	cls WasmMemoryBase::memory_read_##suffix(uint32_t ptr, uint32_t size) {\
 	if (ptr + size >= memory->size) {\
 		ERR_PRINT(vformat("wasm memory out of bounds, mem size: %d, ptr: %d, ptr len: %d", memory->size, ptr, size));\
@@ -13,7 +13,7 @@
 	uint8_t *p = &memory->data[ptr];\
 	cls ret;\
 	ret.resize(size);\
-	memcpy(ret.ptrw(), p, size);\
+	memcpy(ret.ptrw(), p, size*type_size);\
 	return ret;\
 }\
 \
@@ -23,7 +23,7 @@ void WasmMemoryBase::memory_write_##suffix(uint32_t ptr, const cls &data) {\
 		return;\
 	}\
 	uint8_t *p = &memory->data[ptr];\
-	memcpy(p, data.ptr(), data.size());\
+	memcpy(p, data.ptr(), data.size()*type_size);\
 }
 
 #define DEF_MEMORY_IO_FUNC(suffix,cls)\
@@ -43,7 +43,9 @@ protected:
 public:
 	void free_self() ;
 	uint32_t grow(uint32_t page_delta) ;
-
+	uint64_t get_size(){
+		return memory->size;
+	}
 	String memory_read_str(uint32_t ptr);
 	void memory_write_str(uint32_t ptr, const String &data);
 

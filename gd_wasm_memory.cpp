@@ -3,6 +3,7 @@
 void WasmMemoryBase::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("free_self"), &WasmMemoryBase::free_self);
 	ClassDB::bind_method(D_METHOD("grow", "page_delta"), &WasmMemoryBase::grow);
+	ClassDB::bind_method(D_METHOD("get_size"), &WasmMemoryBase::get_size);
 	ClassDB::bind_method(D_METHOD("memory_read_str", "ptr"), &WasmMemoryBase::memory_read_str);
 	ClassDB::bind_method(D_METHOD("memory_write_str", "ptr", "data"), &WasmMemoryBase::memory_write_str);
 
@@ -44,8 +45,8 @@ void WasmMemoryBase::memory_write_str(uint32_t ptr, const String &data) {
 	memcpy(p, data.utf8().ptr(), data.utf8().size());
 }
 
-IMPL_MEMORY_IO_FUNC(u8, PackedByteArray)
-IMPL_MEMORY_IO_FUNC(f32, PackedFloat32Array)
-IMPL_MEMORY_IO_FUNC(f64, PackedFloat64Array)
-IMPL_MEMORY_IO_FUNC(i32, PackedInt32Array)
-IMPL_MEMORY_IO_FUNC(i64, PackedInt64Array)
+IMPL_MEMORY_IO_FUNC(u8, PackedByteArray,1)
+IMPL_MEMORY_IO_FUNC(f32, PackedFloat32Array,4)
+IMPL_MEMORY_IO_FUNC(f64, PackedFloat64Array,8)
+IMPL_MEMORY_IO_FUNC(i32, PackedInt32Array,4)
+IMPL_MEMORY_IO_FUNC(i64, PackedInt64Array,8)
