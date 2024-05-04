@@ -5,8 +5,11 @@ Import("env")
 
 m_env = env.Clone()
 
-# w2c2 glicol_wasm.wasm glicol.c
-sources = [env.Glob("*.cpp"), env.Glob("wasm2c/glicol/*.c"),env.Glob("wasm2c/base/*.c")]
-m_env.Append(CPPPATH=[m_env.Dir(s).abspath for s in ["wasm2c/base", "wasm2c/glicol"]])
-m_env.Append(CPPFLAGS=["-fno-optimize-sibling-calls","-frounding-math"])
+sources = [env.Glob(s) for s in ["*.cpp"]]
+lib_path = [
+    f"target/{'aarch64' if env['arch']=='arm64' else env['arch']}-{'unknown-linux-gnu' if env['platform']=='linuxbsd' else 'linux-android' if env['platform']=='android' else env['platform']}/release"
+]
+
+env.Append(LIBPATH=[env.Dir(p).abspath for p in lib_path])
+env.Append(LIBS=["glicol_lib"])
 m_env.add_source_files(env.modules_sources, sources)
