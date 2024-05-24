@@ -18,15 +18,15 @@ use-meta = []
 bela = []
 
 [dependencies]
-petgraph = { workspace = true }
 glicol_parser = { path = "../glicol_parser" }
 glicol_synth = { path = "../glicol_synth", features = [
-    "use-samples",
-    "use-meta",
+	"use-samples",
+	"use-meta",
 ] }
-lcs-diff = { workspace = true }
-pest = { workspace = true }
-hashbrown = { workspace = true }
+petgraph = { version = "0.6", features = ["stable_graph"] }
+hashbrown = "0.14.3"
+pest = "2.7.9"
+lcs-diff = "0.1.1"
 
 [dev-dependencies]
 gnuplot = "0.0.37"

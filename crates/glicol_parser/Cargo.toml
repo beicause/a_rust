@@ -12,8 +12,8 @@ authors = ["Qichao Lan <chaosprint@gmail.com>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-pest = { workspace = true }
-pest_derive = { workspace = true }
 glicol_synth = { path = "../glicol_synth" }
-hashbrown = { workspace = true }
-fasteval = { workspace = true }
+hashbrown = "0.14.3"
+fasteval = "0.2.4"
+pest = "2.7.9"
+pest_derive = "2.7.9"

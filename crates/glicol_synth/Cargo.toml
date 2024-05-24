@@ -1,12 +1,6 @@
 [package]
 name = "glicol_synth"
-keywords = [
-    "audio",
-    "music",
-    "DSP",
-    "synth",
-    "synthesizer"
-]
+keywords = ["audio", "music", "DSP", "synth", "synthesizer"]
 readme = "README.md"
 license-file = "LICENSE"
 description = "A graph-based music DSP library written in Rust"
@@ -23,28 +17,20 @@ node-sampling = []
 node-dynamic = ["rhai"]
 node-sum = ["dasp_slice"]
 
-[[bench]]
-name = "next_block"
-harness = false
-
-[[bench]]
-name = "fm"
-harness = false
-
 [dependencies]
-petgraph = { workspace = true }
-dasp_slice = { workspace = true, optional = true }
-dasp_ring_buffer = { workspace = true  }
-dasp_signal = { workspace = true  }
-dasp_interpolate = { workspace = true  }
-hashbrown = { workspace = true  }
-arrayvec = { workspace = true  }
-rhai = { workspace = true, optional = true  }
-fasteval = { workspace = true }
-
-[dev-dependencies]
-gnuplot = "0.0.37"
-criterion = "0.4.0"
-# petgraph = { version = "0.6",  features = ["stable_graph"] }
-# cpal = "0.14.0"
-# anyhow = "1.0.63"
+hashbrown = "0.14"
+fasteval = "0.2"
+petgraph = { version = "0.6", features = ["stable_graph"] }
+dasp_slice = { optional = true, version = "0.11", default-features = false, features = [
+	"std",
+] }
+dasp_ring_buffer = "0.11"
+dasp_signal = "0.11"
+dasp_interpolate = { version = "0.11", features = ["linear", "sinc"] }
+arrayvec = "0.7"
+rhai = { optional = true, version = "1.12", default-features = false, features = [
+	"sync",
+	"f32_float",
+	"only_i32",
+] }
+lcs-diff = "0.1"
