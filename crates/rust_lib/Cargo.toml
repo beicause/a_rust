@@ -7,8 +7,8 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-crate-type = ["staticlib"]
+crate-type = ["cdylib"]
 
 [dependencies]
-glicol = { path = "../glicol", features = ["use-samples", "use-meta"] }
-cxx = { workspace = true }
+glicol = { version="0.13", features = ["use-samples", "use-meta"] }
+godot = { workspace = true }
