@@ -53,7 +53,7 @@ impl Glicol {
     }
 
     #[func]
-    pub fn update(&mut self, str: String) {
+    pub fn update_code(&mut self, str: String) {
         self.engine.update_with_code(&str);
     }
 
@@ -78,7 +78,7 @@ impl Glicol {
     }
 
     #[func]
-    pub fn set_sr(&mut self, sr: f32) {
+    pub fn set_sample_rate(&mut self, sr: f32) {
         self.engine.set_sr(sr as usize);
     }
 

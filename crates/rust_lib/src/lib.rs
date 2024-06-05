@@ -1,6 +1,6 @@
-mod glicol;
+pub use gd_glicol::Glicol;
+pub use gd_lz4::LZ4;
 
-pub use glicol::Glicol;
 use godot::prelude::*;
 
 struct MyExt;

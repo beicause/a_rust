@@ -12,7 +12,7 @@ macos.release = "res://bin/librust_lib.dylib"
 windows.debug.x86_64 = "res://bin/librust_lib.dll"
 windows.release.x86_64 = "res://bin/librust_lib.dll"
 
-linux.debug.x86_64 = "res://bin/x86_64-unknown-linux-gnu/release/librust_lib.so"
+linux.debug.x86_64 = "res://bin/x86_64-unknown-linux-gnu/debug/librust_lib.so"
 linux.release.x86_64 = "res://bin/x86_64-unknown-linux-gnu/release/librust_lib.so"
 
 android.debug.arm64 = "res://bin/aarch64-linux-android/release/librust_lib.so"

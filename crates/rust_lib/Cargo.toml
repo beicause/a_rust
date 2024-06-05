@@ -1,8 +1,7 @@
 [package]
 name = "rust_lib"
-version = "0.1.0"
-authors = ["Luo Zhihao <luo_zhihao_jx@qq.com>"]
-edition = "2018"
+version.workspace = true
+edition.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -10,5 +9,6 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-glicol = { version="0.13", features = ["use-samples", "use-meta"] }
 godot = { workspace = true }
+gd_glicol = { path = "../gd_glicol" }
+gd_lz4 = { path = "../gd_lz4" }
