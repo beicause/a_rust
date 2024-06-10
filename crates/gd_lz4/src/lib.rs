@@ -4,14 +4,8 @@ use godot::engine::FileAccess;
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-pub struct LZ4 {}
-
-#[godot_api]
-impl IRefCounted for LZ4 {
-    fn init(_base: Base<RefCounted>) -> Self {
-        LZ4 {}
-    }
-}
+#[class(init)]
+pub struct LZ4;
 
 #[godot_api]
 impl LZ4 {

@@ -22,7 +22,6 @@ impl IRefCounted for Glicol {
 
 #[godot_api]
 impl Glicol {
-    
     #[func]
     pub fn process(&mut self, size: u64) -> PackedFloat32Array {
         let size = size as usize;
