@@ -12,4 +12,3 @@ crate-type = ["cdylib"]
 godot = { workspace = true }
 gd_glicol = { path = "../gd_glicol" }
 gd_lz4 = { path = "../gd_lz4" }
-gd_toml = { path = "../gd_toml" }
