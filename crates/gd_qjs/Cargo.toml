@@ -1,0 +1,10 @@
+[package]
+name = "gd_qjs"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+godot = { workspace = true }
+quick-js = { git = "https://github.com/beicause/quickjs-rs", branch = "master", features = [
+    "log",
+] }

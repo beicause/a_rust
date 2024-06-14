@@ -1,6 +1,11 @@
 [workspace]
 default-members = ["crates/rust_lib"]
-members = [ "crates/gd_lz4","crates/gd_glicol", "crates/rust_lib"]
+members = [
+	"crates/gd_lz4",
+	"crates/gd_glicol",
+	"crates/rust_lib",
+	"crates/gd_qjs",
+]
 resolver = "1"
 
 [workspace.package]
