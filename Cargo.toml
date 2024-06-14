@@ -4,7 +4,7 @@ members = [
 	"crates/gd_lz4",
 	"crates/gd_glicol",
 	"crates/rust_lib",
-	"crates/gd_qjs",
+	"crates/gd_qjs", "crates/logger",
 ]
 resolver = "1"
 

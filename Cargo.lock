@@ -685,6 +685,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
 
 [[package]]
+name = "logger"
+version = "0.13.5"
+dependencies = [
+ "godot",
+ "log",
+]
+
+[[package]]
 name = "lz4_flex"
 version = "0.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -906,6 +914,7 @@ dependencies = [
  "gd_lz4",
  "gd_qjs",
  "godot",
+ "logger",
 ]
 
 [[package]]

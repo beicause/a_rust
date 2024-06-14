@@ -1,0 +1,8 @@
+[package]
+name = "logger"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+godot = { workspace = true }
+log = "0.4"
