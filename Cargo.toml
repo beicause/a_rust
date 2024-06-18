@@ -1,6 +1,11 @@
 [workspace]
 default-members = ["crates/rust_lib"]
-members = [ "crates/gd_lz4","crates/gd_glicol", "crates/rust_lib"]
+members = [
+	"crates/gd_lz4",
+	"crates/gd_glicol",
+	"crates/rust_lib",
+	"crates/gd_toml",
+]
 resolver = "1"
 
 [workspace.package]
@@ -10,6 +15,7 @@ edition = "2021"
 [workspace.dependencies]
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master", features = [
 	"api-custom",
+	"experimental-threads",
 ] }
 
 [profile.release]

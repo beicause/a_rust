@@ -1,0 +1,8 @@
+[package]
+name = "gd_toml"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+godot = { workspace = true }
+toml = "0.8"
