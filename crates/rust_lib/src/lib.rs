@@ -3,6 +3,7 @@ use std::sync::LazyLock;
 use godot::prelude::*;
 
 pub use gd_glicol::Glicol;
+pub use gd_jmespath::{JMESExpr, JMESVariable};
 pub use gd_lz4::LZ4;
 pub use gd_toml::loader::{TOMLLoader, TOMLLoaderSingleton, TOMLSaver};
 pub use gd_toml::TOML;

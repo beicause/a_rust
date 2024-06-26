@@ -56,6 +56,15 @@ impl TOML {
             toml::ser::to_string(&self.value).unwrap()
         }
     }
+
+    #[func]
+    fn to_json_str(&self, pretty: bool) -> String {
+        if pretty {
+            serde_json::to_string_pretty(&self.value).unwrap()
+        } else {
+            serde_json::to_string(&self.value).unwrap()
+        }
+    }
 }
 
 fn value_to_variant(value: &toml::Value) -> Variant {
