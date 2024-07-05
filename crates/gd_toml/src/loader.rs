@@ -20,7 +20,11 @@ impl IResourceFormatLoader for TOMLLoader {
         type_ == "TOML".into()
     }
     fn get_resource_type(&self, path: GString) -> GString {
-        if std::path::Path::new(&path.to_string()).extension().unwrap() == "toml" {
+        if std::path::Path::new(&path.to_string())
+            .extension()
+            .unwrap_or(std::ffi::OsStr::new(""))
+            == "toml"
+        {
             "TOML"
         } else {
             ""
