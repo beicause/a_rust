@@ -14,10 +14,23 @@ Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String
 
 	Ref<JSON> json;
 	json.instantiate();
+
+	Error err_text = json->parse(FileAccess::get_file_as_string(p_path));
+	if (err_text == OK) {
+		if (r_error) {
+			*r_error = OK;
+		}
+		return json;
+	}
+
 	PackedByteArray json_file = Lz4::decompress_frame(FileAccess::get_file_as_bytes(p_path));
 	String json_str = "";
-	json_str.parse_utf8(reinterpret_cast<const char *>(json_file.ptr()));
-	Error err = json->parse(json_str);
+	Error err = json_str.parse_utf8(reinterpret_cast<const char *>(json_file.ptr()));
+	if (err != OK) {
+		ERR_PRINT("Error parsing decompressed buffer to utf8 string");
+		return Ref<Resource>();
+	}
+	err = json->parse(json_str);
 	if (err != OK) {
 		String err_text = "Error parsing JSON file at '" + p_path + "', on line " + itos(json->get_error_line()) + ": " + json->get_error_message();
 		if (r_error) {

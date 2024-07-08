@@ -10,7 +10,7 @@ String ResourceImporterJSON5::get_visible_name() const {
 	return "JSON";
 }
 String ResourceImporterJSON5::get_save_extension() const {
-	return "json";
+	return "jsonz";
 }
 
 String ResourceImporterJSON5::get_resource_type() const {
@@ -46,12 +46,12 @@ Error ResourceImporterJSON5::import(const String &p_source_file, const String &p
 		ERR_PRINT(err_text);
 		return ERR_INVALID_DATA;
 	}
+	Ref<FileAccess> file = FileAccess::open(p_save_path + ".jsonz", FileAccess::WRITE);
 	if (compress) {
-		Ref<FileAccess> file = FileAccess::open(p_save_path + ".jsonz", FileAccess::WRITE);
 		file->store_buffer(Lz4::compress_frame(json->get_parsed_text().to_utf8_buffer()));
-		file->close();
 	} else {
-		err = ResourceSaver::save(json, p_save_path + ".json");
+		file->store_string(json->get_parsed_text());
 	}
+	file->close();
 	return err;
 }
