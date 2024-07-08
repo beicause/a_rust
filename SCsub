@@ -6,11 +6,17 @@ m_env = env.Clone()
 target = f"{'aarch64' if env['arch']=='arm64' else env['arch']}-{'unknown-linux-gnu' if env['platform']=='linuxbsd' else 'linux-android' if env['platform']=='android' else env['platform']}"
 
 os.system(f"cargo b -p rust_lib --target {target} -r")
-os.system("cxxbridge crates/rust_lib/src/lib.rs --header > rust_lib.rs.h")
-os.system("cxxbridge crates/rust_lib/src/lib.rs > rust_lib.rs.cpp")
 
-sources = [env.Glob(s) for s in ["*.cpp"]]
+rust_libs = ["gd_glicol", "gd_lz4", "gd_jmespath", "gd_json5"]
+for p in rust_libs:
+    os.system(f"cxxbridge crates/{p}/src/lib.rs --header > {p}.rs.h")
+    os.system(f"cxxbridge crates/{p}/src/lib.rs > {p}.rs.cpp")
+
+sources = [env.Glob("*.cpp")]
 lib_path = [f"target/{target}/release"]
+
+if env.editor_build:
+    sources.append(env.Glob("editor/*.cpp"))
 
 env.Append(LIBPATH=[env.Dir(p).abspath for p in lib_path])
 env.Append(LIBS=["rust_lib"])

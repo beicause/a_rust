@@ -2,9 +2,10 @@
 default-members = ["crates/rust_lib"]
 members = [
 	"crates/rust_lib",
-	"crates/glicol",
-	"crates/glicol_parser",
-	"crates/glicol_synth",
+	"crates/gd_lz4",
+	"crates/gd_glicol",
+	"crates/gd_jmespath",
+	"crates/gd_json5",
 ]
 resolver = "1"
 

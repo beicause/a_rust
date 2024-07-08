@@ -10,5 +10,7 @@ edition = "2018"
 crate-type = ["staticlib"]
 
 [dependencies]
-glicol = { path = "../glicol", features = ["use-samples", "use-meta"] }
-cxx = { workspace = true }
+gd_glicol = { path = "../gd_glicol" }
+gd_jmespath = { path = "../gd_jmespath" }
+gd_lz4 = { path = "../gd_lz4" }
+gd_json5 = { path = "../gd_json5" }

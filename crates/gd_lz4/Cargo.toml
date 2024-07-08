@@ -1,0 +1,8 @@
+[package]
+name = "gd_lz4"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+lz4_flex = { version = "0.11", default-features = false, features = ["std","frame"]}
+cxx = { workspace = true }
