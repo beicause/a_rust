@@ -35,7 +35,7 @@ impl Glicol {
         self.engine.add_sample(name_str, p_slice, channels, sr);
     }
 
-    pub fn update(&mut self, code: &str) {
+    pub fn update_code(&mut self, code: &str) {
         self.engine.update_with_code(code);
     }
 
@@ -75,7 +75,7 @@ pub mod ffi {
         fn glicol_create() -> Box<Glicol>;
         unsafe fn process(&mut self, size: usize, o_bytes: *mut f32);
         fn add_sample(&mut self, name_str: &str, sample: Vec<f32>, channels: usize, sr: usize);
-        fn update(&mut self, code: &str);
+        fn update_code(&mut self, code: &str);
         fn send_msg(&mut self, msg: &str);
         fn live_coding_mode(&mut self, io: bool);
         fn set_bpm(&mut self, bpm: f32);
