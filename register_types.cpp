@@ -1,16 +1,16 @@
 #include "register_types.h"
 #include "gd_glicol.h"
 #include "gd_jmespath.h"
-#include "gd_json5.h"
+#include "gd_json_converter.h"
 #include "gd_lz4.h"
 #include "resource_loader_jsonz.h"
 
 Ref<ResourceFormatLoaderJSONZ> resource_loader_jsonz;
 
 #ifdef TOOLS_ENABLED
-#include "editor/resource_importer_json5.h"
+#include "editor/resource_importer_json_converter.h"
 
-static Ref<ResourceImporterJSON5> resource_importer_json5;
+static Ref<ResourceImporterJSONConverter> resource_importer_json5;
 #endif // TOOLS_ENABLED
 
 void initialize_a_rust_module(ModuleInitializationLevel p_level) {
@@ -21,7 +21,7 @@ void initialize_a_rust_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<Lz4>();
 	ClassDB::register_class<JMESExpr>();
 	ClassDB::register_class<JMESVariable>();
-	ClassDB::register_class<JSON5>();
+	ClassDB::register_class<JSONConverter>();
 
 	resource_loader_jsonz.instantiate();
 

@@ -1,0 +1,9 @@
+[package]
+name = "gd_toml"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+toml = "0.8"
+serde_json = "1"
+cxx = { workspace = true }

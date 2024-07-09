@@ -2,8 +2,8 @@
 
 #include "core/io/resource_importer.h"
 
-class ResourceImporterJSON5 : public ResourceImporter {
-	GDCLASS(ResourceImporterJSON5, ResourceImporter);
+class ResourceImporterJSONConverter : public ResourceImporter {
+	GDCLASS(ResourceImporterJSONConverter, ResourceImporter);
 
 public:
 	virtual String get_importer_name() const override;

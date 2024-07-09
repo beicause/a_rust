@@ -17,13 +17,14 @@ if not env.dev_build:
 
 assert os.system(cargo_cmd) == 0
 
-rust_libs = ["gd_glicol", "gd_lz4", "gd_jmespath", "gd_json5"]
+rust_libs = ["gd_glicol", "gd_lz4", "gd_jmespath", "gd_json5", "gd_toml"]
+
 for p in rust_libs:
     assert os.system(f"cxxbridge crates/{p}/src/lib.rs --header > {p}.rs.h") == 0
     assert os.system(f"cxxbridge crates/{p}/src/lib.rs > {p}.rs.cpp") == 0
 
 sources = [env.Glob("*.cpp")]
-lib_path = [f"target/{target}/release"]
+lib_path = [f"target/{target}/{'release' if not env.dev_build else 'debug'}"]
 
 if env.editor_build:
     sources.append(env.Glob("editor/*.cpp"))
