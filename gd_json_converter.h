@@ -18,16 +18,24 @@ protected:
 
 public:
 	static String json5_to_json(String data, bool pretty = false) {
-		return json5::json5_to_json(rust::Str(data.utf8().get_data()), pretty).data();
+		String ret;
+		ret.parse_utf8(json5::json5_to_json(rust::Str(data.utf8().get_data()), pretty).c_str());
+		return ret;
 	}
 	static String json_to_json5(String data) {
-		return json5::json_to_json5(rust::Str(data.utf8().get_data())).data();
+		String ret;
+		ret.parse_utf8(json5::json_to_json5(rust::Str(data.utf8().get_data())).c_str());
+		return ret;
 	}
 
 	static String toml_to_json(String data, bool pretty = false) {
-		return toml::toml_to_json(rust::Str(data.utf8().get_data()), pretty).data();
+		String ret;
+		ret.parse_utf8(toml::toml_to_json(rust::Str(data.utf8().get_data()), pretty).c_str());
+		return ret;
 	}
 	static String json_to_toml(String data, bool pretty = false) {
-		return toml::json_to_toml(rust::Str(data.utf8().get_data()), pretty).data();
+		String ret;
+		ret.parse_utf8(toml::json_to_toml(rust::Str(data.utf8().get_data()), pretty).c_str());
+		return ret;
 	}
 };

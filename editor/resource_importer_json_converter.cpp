@@ -68,7 +68,8 @@ Error ResourceImporterJSONConverter::import(const String &p_source_file, const S
 	}
 	Ref<FileAccess> file = FileAccess::open(p_save_path + ".jsonz", FileAccess::WRITE);
 	if (compress) {
-		file->store_buffer(Lz4::compress_frame(json->get_parsed_text().to_utf8_buffer()));
+		PackedByteArray b = json->get_parsed_text().to_utf8_buffer();
+		file->store_buffer(Lz4::compress_frame(b));
 	} else {
 		file->store_string(json->get_parsed_text());
 	}
