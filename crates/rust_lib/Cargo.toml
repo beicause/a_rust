@@ -13,5 +13,4 @@ crate-type = ["staticlib"]
 gd_glicol = { path = "../gd_glicol" }
 gd_jmespath = { path = "../gd_jmespath" }
 gd_lz4 = { path = "../gd_lz4" }
-gd_json5 = { path = "../gd_json5" }
-gd_toml = { path = "../gd_toml" }
+gd_json_converter = { path = "../gd_json_converter" }

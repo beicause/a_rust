@@ -9,7 +9,7 @@ def get_doc_classes():
         "Glicol",
         "JMESExpr",
         "JMESVariable",
-        "JSON5",
+        "JSONConverter",
         "Lz4"
     ]
 

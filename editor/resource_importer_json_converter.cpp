@@ -34,6 +34,8 @@ void ResourceImporterJSONConverter::get_recognized_extensions(List<String> *p_ex
 	p_extensions->push_back("json");
 	p_extensions->push_back("json5");
 	p_extensions->push_back("toml");
+	p_extensions->push_back("yaml");
+	p_extensions->push_back("yml");
 }
 
 Error ResourceImporterJSONConverter::import(const String &p_source_file, const String &p_save_path, const HashMap<StringName, Variant> &p_options, List<String> *r_platform_variants, List<String> *r_gen_files, Variant *r_metadata) {
@@ -57,6 +59,8 @@ Error ResourceImporterJSONConverter::import(const String &p_source_file, const S
 		json_text = JSONConverter::json5_to_json(file_content, pretty);
 	} else if (file_ext == "toml") {
 		json_text = JSONConverter::toml_to_json(file_content, pretty);
+	} else if (file_ext == "yaml") {
+		json_text = JSONConverter::yaml_to_json(file_content, pretty);
 	} else {
 		return ERR_FILE_UNRECOGNIZED;
 	}

@@ -5,8 +5,7 @@ members = [
 	"crates/gd_lz4",
 	"crates/gd_glicol",
 	"crates/gd_jmespath",
-	"crates/gd_json5",
-	"crates/gd_toml",
+	"crates/gd_json_converter",
 ]
 resolver = "1"
 
