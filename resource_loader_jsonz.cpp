@@ -18,8 +18,9 @@ Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String
 	PackedByteArray bytes = FileAccess::get_file_as_bytes(p_path);
 	bytes.push_back(0);
 	String json_str_raw;
-	Error err = json_str_raw.parse_utf8(reinterpret_cast<const char *>(bytes.ptr()));
+	Error err = json_str_raw.validate_utf8(reinterpret_cast<const char *>(bytes.ptr()));
 	if (err == OK) {
+		json_str_raw.parse_utf8(reinterpret_cast<const char *>(bytes.ptr()));
 		err = json->parse(json_str_raw);
 		if (err != OK) {
 			String err_text = "Error parsing JSON file at '" + p_path + "', on line " + itos(json->get_error_line()) + ": " + json->get_error_message();
