@@ -2,20 +2,15 @@
 #include "core/io/json.h"
 #include "modules/a_lz4/gd_lz4.h"
 
-Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
+Ref<JSON> ResourceFormatLoaderJSONZ::load(const PackedByteArray &p_bytes, Error *r_error) {
 	if (r_error) {
 		*r_error = ERR_FILE_CANT_OPEN;
-	}
-
-	if (!FileAccess::exists(p_path)) {
-		*r_error = ERR_FILE_NOT_FOUND;
-		return Ref<Resource>();
 	}
 
 	Ref<JSON> json;
 	json.instantiate();
 
-	PackedByteArray bytes = FileAccess::get_file_as_bytes(p_path);
+	PackedByteArray bytes = p_bytes;
 	bytes.push_back(0);
 	String json_str_raw;
 	Error err = json_str_raw.validate_utf8(reinterpret_cast<const char *>(bytes.ptr()));
@@ -23,7 +18,7 @@ Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String
 		json_str_raw.parse_utf8(reinterpret_cast<const char *>(bytes.ptr()));
 		err = json->parse(json_str_raw);
 		if (err != OK) {
-			String err_text = "Error parsing JSON file at '" + p_path + "', on line " + itos(json->get_error_line()) + ": " + json->get_error_message();
+			String err_text = "Error parsing JSON file on line " + itos(json->get_error_line()) + ": " + json->get_error_message();
 			if (r_error) {
 				*r_error = err;
 			}
@@ -49,7 +44,7 @@ Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String
 	}
 	err = json->parse(json_str_z);
 	if (err != OK) {
-		String err_text = "Error parsing JSON file at '" + p_path + "', on line " + itos(json->get_error_line()) + ": " + json->get_error_message();
+		String err_text = "Error parsing JSON file, on line " + itos(json->get_error_line()) + ": " + json->get_error_message();
 		if (r_error) {
 			*r_error = err;
 		}
@@ -62,6 +57,19 @@ Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String
 	}
 
 	return json;
+}
+
+Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
+	if (r_error) {
+		*r_error = ERR_FILE_CANT_OPEN;
+	}
+
+	if (!FileAccess::exists(p_path)) {
+		*r_error = ERR_FILE_NOT_FOUND;
+		return Ref<Resource>();
+	}
+
+	return load(FileAccess::get_file_as_bytes(p_path), r_error);
 }
 
 void ResourceFormatLoaderJSONZ::get_recognized_extensions(List<String> *p_extensions) const {
