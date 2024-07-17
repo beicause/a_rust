@@ -1,6 +1,6 @@
 #include "resource_loader_jsonz.h"
 #include "core/io/json.h"
-#include "gd_lz4.h"
+#include "modules/a_lz4/gd_lz4.h"
 
 Ref<Resource> ResourceFormatLoaderJSONZ::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
 	if (r_error) {

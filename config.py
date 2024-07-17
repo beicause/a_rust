@@ -1,4 +1,5 @@
 def can_build(env,platform):
+    env.module_add_dependencies("a_rust", ["a_lz4"])
     return True
 
 def configure(env):
@@ -10,7 +11,6 @@ def get_doc_classes():
         "JMESExpr",
         "JMESVariable",
         "JSONConverter",
-        "Lz4"
     ]
 
 def get_doc_path():

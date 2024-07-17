@@ -1,7 +1,7 @@
 #include "resource_importer_json_converter.h"
 #include "core/io/json.h"
+#include "modules/a_lz4/gd_lz4.h"
 #include "modules/a_rust/gd_json_converter.h"
-#include "modules/a_rust/gd_lz4.h"
 
 String ResourceImporterJSONConverter::get_importer_name() const {
 	return "json_converter";
@@ -26,6 +26,7 @@ String ResourceImporterJSONConverter::get_preset_name(int p_idx) const {
 void ResourceImporterJSONConverter::get_import_options(const String &p_path, List<ImportOption> *r_options, int p_preset) const {
 	r_options->push_back(ImportOption(PropertyInfo(Variant::BOOL, "pretty"), false));
 	r_options->push_back(ImportOption(PropertyInfo(Variant::BOOL, "compress"), true));
+	r_options->push_back(ImportOption(PropertyInfo(Variant::INT, "compression_level", PROPERTY_HINT_RANGE, "0,12"), 9));
 }
 bool ResourceImporterJSONConverter::get_option_visibility(const String &p_path, const String &p_option, const HashMap<StringName, Variant> &p_options) const {
 	return true;
@@ -41,6 +42,7 @@ void ResourceImporterJSONConverter::get_recognized_extensions(List<String> *p_ex
 Error ResourceImporterJSONConverter::import(const String &p_source_file, const String &p_save_path, const HashMap<StringName, Variant> &p_options, List<String> *r_platform_variants, List<String> *r_gen_files, Variant *r_metadata) {
 	const bool pretty = p_options["pretty"];
 	const bool compress = p_options["compress"];
+	const int compression_level = p_options["compression_level"];
 
 	Ref<JSON> json;
 	json.instantiate();
@@ -73,7 +75,7 @@ Error ResourceImporterJSONConverter::import(const String &p_source_file, const S
 	Ref<FileAccess> file = FileAccess::open(p_save_path + ".jsonz", FileAccess::WRITE);
 	if (compress) {
 		PackedByteArray b = json->get_parsed_text().to_utf8_buffer();
-		file->store_buffer(Lz4::compress_frame(b));
+		file->store_buffer(Lz4::compress_frame(b, compression_level));
 	} else {
 		file->store_string(json->get_parsed_text());
 	}

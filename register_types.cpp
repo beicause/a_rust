@@ -2,7 +2,6 @@
 #include "gd_glicol.h"
 #include "gd_jmespath.h"
 #include "gd_json_converter.h"
-#include "gd_lz4.h"
 #include "resource_loader_jsonz.h"
 
 Ref<ResourceFormatLoaderJSONZ> resource_loader_jsonz;
@@ -18,7 +17,6 @@ void initialize_a_rust_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 	ClassDB::register_class<Glicol>();
-	ClassDB::register_class<Lz4>();
 	ClassDB::register_class<JMESExpr>();
 	ClassDB::register_class<JMESVariable>();
 	ClassDB::register_class<JSONConverter>();
