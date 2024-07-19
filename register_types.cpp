@@ -2,9 +2,6 @@
 #include "gd_glicol.h"
 #include "gd_jmespath.h"
 #include "gd_json_converter.h"
-#include "resource_loader_jsonz.h"
-
-Ref<ResourceFormatLoaderJSONZ> resource_loader_jsonz;
 
 #ifdef TOOLS_ENABLED
 #include "editor/resource_importer_json_converter.h"
@@ -21,10 +18,6 @@ void initialize_a_rust_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<JMESVariable>();
 	ClassDB::register_class<JSONConverter>();
 
-	resource_loader_jsonz.instantiate();
-
-	ResourceLoader::add_resource_format_loader(resource_loader_jsonz);
-
 #ifdef TOOLS_ENABLED
 	resource_importer_json5.instantiate();
 
@@ -36,10 +29,6 @@ void uninitialize_a_rust_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
-
-	ResourceLoader::remove_resource_format_loader(resource_loader_jsonz);
-
-	resource_loader_jsonz.unref();
 
 #ifdef TOOLS_ENABLED
 	ResourceFormatImporter::get_singleton()->remove_importer(resource_importer_json5);
