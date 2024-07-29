@@ -1,5 +1,5 @@
 def can_build(env,platform):
-    env.module_add_dependencies("a_rust", ["a_lz4"])
+    env.module_add_dependencies("a_rust", ["a_lz4","a_jsonnet"])
     return True
 
 def configure(env):

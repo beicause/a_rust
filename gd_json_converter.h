@@ -3,6 +3,7 @@
 #include "core/object/ref_counted.h"
 #include "crates/cxx.h"
 #include "gd_json_converter.rs.h"
+#include "modules/a_jsonnet/gd_jsonnet.h"
 
 class JSONConverter : public RefCounted {
 	GDCLASS(JSONConverter, RefCounted);
@@ -41,13 +42,9 @@ public:
 	}
 
 	static String yaml_to_json(String data, bool pretty = false) {
-		String ret;
-		ret.parse_utf8(json_converter::yaml_to_json(rust::Str(data.utf8().get_data()), pretty).c_str());
-		return ret;
+		return ryml_yaml_to_json(data, pretty);
 	}
 	static String json_to_yaml(String data) {
-		String ret;
-		ret.parse_utf8(json_converter::json_to_yaml(rust::Str(data.utf8().get_data())).c_str());
-		return ret;
+		return ryml_json_to_yaml(data);
 	}
 };

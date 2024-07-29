@@ -50,28 +50,6 @@ pub fn json_to_toml(json: &str, pretty: bool) -> String {
     }
 }
 
-pub fn yaml_to_json(data: &str, pretty: bool) -> String {
-    let value: Result<serde_json::Value, serde_yaml::Error> = serde_yaml::from_str(data);
-    if value.is_err() {
-        println!("YAML deserialization error: {}", value.unwrap_err());
-        return String::new();
-    }
-    if pretty {
-        serde_json::to_string_pretty(&value.unwrap()).unwrap()
-    } else {
-        serde_json::to_string(&value.unwrap()).unwrap()
-    }
-}
-
-pub fn json_to_yaml(json: &str) -> String {
-    let value: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(json);
-    if value.is_err() {
-        println!("JSON deserialization error: {}", value.unwrap_err());
-        return String::new();
-    }
-    serde_yaml::to_string(&value.unwrap()).unwrap()
-}
-
 #[cxx::bridge(namespace = "json_converter")]
 pub mod ffi {
     extern "Rust" {
@@ -80,8 +58,5 @@ pub mod ffi {
 
         fn toml_to_json(toml: &str, pretty: bool) -> String;
         fn json_to_toml(json: &str, pretty: bool) -> String;
-
-        fn yaml_to_json(yaml: &str, pretty: bool) -> String;
-        fn json_to_yaml(json: &str) -> String;
     }
 }
