@@ -5,8 +5,7 @@
 
 #ifdef TOOLS_ENABLED
 #include "editor/resource_importer_json_converter.h"
-
-static Ref<ResourceImporterJSONConverter> resource_importer_json5;
+static Ref<ResourceImporterJSONConverter> resource_importer_json_converter;
 #endif // TOOLS_ENABLED
 
 void initialize_a_rust_module(ModuleInitializationLevel p_level) {
@@ -19,9 +18,8 @@ void initialize_a_rust_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<JSONConverter>();
 
 #ifdef TOOLS_ENABLED
-	resource_importer_json5.instantiate();
-
-	ResourceFormatImporter::get_singleton()->add_importer(resource_importer_json5);
+	resource_importer_json_converter.instantiate();
+	ResourceFormatImporter::get_singleton()->add_importer(resource_importer_json_converter);
 #endif // TOOLS_ENABLED
 }
 
@@ -31,8 +29,7 @@ void uninitialize_a_rust_module(ModuleInitializationLevel p_level) {
 	}
 
 #ifdef TOOLS_ENABLED
-	ResourceFormatImporter::get_singleton()->remove_importer(resource_importer_json5);
-
-	resource_importer_json5.unref();
+	ResourceFormatImporter::get_singleton()->remove_importer(resource_importer_json_converter);
+	resource_importer_json_converter.unref();
 #endif
 }

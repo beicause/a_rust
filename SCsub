@@ -9,7 +9,7 @@ target = f"{'aarch64' if env['arch']=='arm64' else env['arch']}-{'unknown-linux-
 cargo_cmd = ""
 
 if target == "aarch64-linux-android":
-    cargo_cmd = "cargo ndk -t arm64-v8a b"
+    cargo_cmd = "cargo ndk -t arm64-v8a b -p rust_lib"
 else:
     cargo_cmd = f"cargo b -p rust_lib --target {target}"
 
