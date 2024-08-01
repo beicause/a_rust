@@ -1,7 +1,7 @@
 use jmespath;
 
 pub struct JMESExpr {
-    expr: jmespath::Expression<'static>,
+    expr: Option<jmespath::Expression<'static>>,
 }
 
 pub struct JMESVariable {
@@ -13,22 +13,26 @@ impl JMESExpr {
         let expr = jmespath::compile(str);
         if expr.is_err() {
             println!("JMESPath expr compilation error: {}", expr.unwrap_err());
-            Self {
-                expr: jmespath::compile("").unwrap(),
-            }
+            Self { expr: None }
         } else {
             Self {
-                expr: expr.unwrap(),
+                expr: Some(expr.unwrap()),
             }
         }
     }
 
     fn to_str(&self) -> String {
-        self.expr.as_str().to_string()
+        if let Some(e) = &self.expr {
+            return e.as_str().to_string()
+        }
+        "".to_string()
     }
 
     fn search(&self, data: &JMESVariable) -> String {
-        match self.expr.search(&data.var) {
+        if self.expr.is_none() {
+            return "".to_string();
+        }
+        match self.expr.as_ref().unwrap().search(&data.var) {
             Ok(v) => serde_json::to_string(&v).unwrap(),
             Err(err) => {
                 println!("JMESPath search error: {}", err);
