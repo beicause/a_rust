@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/object/ref_counted.h"
-#include "crates/cxx.h"
+#include "cxx.h"
 #include "gd_json_converter.rs.h"
 #include "modules/a_jsonnet/gd_jsonnet.h"
 

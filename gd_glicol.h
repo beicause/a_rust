@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/object/ref_counted.h"
-#include "crates/cxx.h"
+#include "cxx.h"
 #include "gd_glicol.rs.h"
 
 class Glicol : public RefCounted {

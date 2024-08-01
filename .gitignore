@@ -20,3 +20,4 @@ __pycache__
 
 *.rs.h
 *.rs.cpp
+cxx.h
