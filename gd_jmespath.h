@@ -24,7 +24,7 @@ public:
 	}
 
 	String to_json_str(bool pretty) const {
-		return inst->to_json_str(pretty).data();
+		return inst->to_json_str(pretty).c_str();
 	}
 };
 
@@ -48,9 +48,9 @@ public:
 		return ret;
 	}
 	String to_str() const {
-		return inst->to_str().data();
+		return inst->to_str().c_str();
 	}
 	String search(Ref<JMESVariable> data) const {
-		return inst->search(*data->inst).data();
+		return inst->search(*data->inst).c_str();
 	}
 };
